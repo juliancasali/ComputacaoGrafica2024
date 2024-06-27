@@ -1,1 +1,1 @@
-# computacaoGrafica2024
+# ComputacaoGrafica2024
