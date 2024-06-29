@@ -1,14 +1,19 @@
 #include "Sprite.h"
+#include <GLFW/glfw3.h>
 
-Sprite::Sprite(){ }
+enum movement { LEFT, RIGHT };
+
+
+Sprite::Sprite() { }
 
 Sprite::~Sprite()
 {
     glDeleteVertexArrays(1, &VAO);
 }
 
-void Sprite::initRenderData(GLuint texture, int nAnimations, int nFrames, glm::vec3 position, glm::vec3 size, float angulo, glm::vec3 cor)
+void Sprite::init(GLuint texture, int nAnimations, int nFrames, glm::vec3 position, glm::vec3 size, float angulo, glm::vec3 cor)
 {
+    this->texture = texture;
     this->position = position;
     this->size.x = size.x / (float)nFrames;
     this->size.y = size.y / (float)nAnimations;
@@ -16,25 +21,29 @@ void Sprite::initRenderData(GLuint texture, int nAnimations, int nFrames, glm::v
     this->nAnimations = nAnimations;
     this->nFrames = nFrames;
 
+    speed.x = 10.0;
+    speed.y = 10.0;
 
-    offsetTex.s = 1.0 / (float)nFrames;
-    offsetTex.t = 1.0 / (float)nAnimations;
+    ds = 1.0 / (float)nFrames;
+    dt = 1.0 / (float)nAnimations;
+
+    //iFrame = ds + 1;
 
     GLfloat vertices[] = {
-          
+
         //Triangulo 1
         // positions             cor           textura
         // x    y   z       r    g      b       s   t
-        -0.5 , 0.5, 0.0, cor.r, cor.g, cor.b, 0.0, offsetTex.t,
-        -0.5 ,-0.5, 0.0, cor.r, cor.g, cor.b, 0.0, 0.0,  
-         0.5 , 0.5, 0.0, cor.r, cor.g, cor.b, offsetTex.s, offsetTex.t,
+        -0.5 , 0.5, 0.0, cor.r, cor.g, cor.b, 0.0, dt,
+        -0.5 ,-0.5, 0.0, cor.r, cor.g, cor.b, 0.0, 0.0,
+         0.5 , 0.5, 0.0, cor.r, cor.g, cor.b, ds, dt,
 
-        //Triangulo 2
-        // positions             cor           textura
-        // x    y   z       r    g      b       s   t	
-        -0.5 ,-0.5, 0.0, cor.r, cor.g, cor.b, 0.0, 0.0,  
-         0.5 ,-0.5, 0.0, cor.r, cor.g, cor.b, offsetTex.s, 0.0,
-         0.5 , 0.5, 0.0, cor.r, cor.g, cor.b, offsetTex.s, offsetTex.t
+         //Triangulo 2
+         // positions             cor           textura
+         // x    y   z       r    g      b       s   t	
+         -0.5 ,-0.5, 0.0, cor.r, cor.g, cor.b, 0.0, 0.0,
+          0.5 ,-0.5, 0.0, cor.r, cor.g, cor.b, ds, 0.0,
+          0.5 , 0.5, 0.0, cor.r, cor.g, cor.b, ds, dt
     };
 
     // configure VAO/VBO
@@ -77,8 +86,19 @@ void Sprite::initRenderData(GLuint texture, int nAnimations, int nFrames, glm::v
 
 void Sprite::update()
 {
+    
+    iFrame = (iFrame + 1) % nFrames;
+
+    float offsetS = iFrame + ds;
+    float offsetT = iAnimation + dt;
+    this->shader->setVec2("offsetTex", offsetS, offsetT);
+
+    
+
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, position);
+   // if (isMirroded)
+    //    model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 1.0f));
     model = glm::rotate(model, glm::radians(angulo), glm::vec3(0.0f, 0.0f, 1.0f));
     model = glm::scale(model, size);
 
@@ -94,4 +114,8 @@ void Sprite::Draw()
     glDrawArrays(GL_TRIANGLES, 0, 6);
     glBindTexture(GL_TEXTURE_2D, 0);
     glBindVertexArray(0);
+}
+
+void Sprite::morroIt()
+{
 }
