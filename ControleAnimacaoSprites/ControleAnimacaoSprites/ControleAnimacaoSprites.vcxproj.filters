@@ -31,10 +31,10 @@
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\ObjetoTexturizado\ObjetoTexturizado\FragmentShader.fs">
+    <None Include="VertexShader.vs">
       <Filter>Arquivos de Recurso</Filter>
     </None>
-    <None Include="..\..\ObjetoTexturizado\ObjetoTexturizado\VertexShader.vs">
+    <None Include="FragmentShader.fs">
       <Filter>Arquivos de Recurso</Filter>
     </None>
   </ItemGroup>

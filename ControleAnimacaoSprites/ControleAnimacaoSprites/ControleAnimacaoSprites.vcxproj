@@ -138,8 +138,8 @@
     <ClInclude Include="Sprite.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="..\..\ObjetoTexturizado\ObjetoTexturizado\FragmentShader.fs" />
-    <None Include="..\..\ObjetoTexturizado\ObjetoTexturizado\VertexShader.vs" />
+    <None Include="FragmentShader.fs" />
+    <None Include="VertexShader.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
