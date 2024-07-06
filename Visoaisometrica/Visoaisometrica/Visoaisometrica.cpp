@@ -14,7 +14,7 @@
 #include <iostream>
 #include <vector>
 #include "TileMap.h"
-#include "DiamondView.h"
+//#include "DiamondView.h"
 #include "SlideView.h"
 #include "ltMath.h"
 #include <fstream>
@@ -40,14 +40,14 @@ float tileW, tileW2;
 float tileH, tileH2;
 int cx = -1, cy = -1;
 
-TilemapView* tview = new DiamondView();
-// TilemapView *tview = new SlideView();
+//TilemapView* tview = new DiamondView();
+TilemapView *tview = new SlideView();
 TileMap* tmap = NULL;
 
 GLFWwindow* g_window = NULL;
 
-TileMap* readMap(char* filename) {
-	ifstream arq(filename);
+TileMap* readMap(string filename) {
+	ifstream arq(filename.c_str());
 	int w, h;
 	arq >> w >> h;
 	TileMap* tmap = new TileMap(w, h, 0);
@@ -64,7 +64,7 @@ TileMap* readMap(char* filename) {
 	return tmap;
 }
 
-int loadTexture(unsigned int& texture, char* filename)
+int loadTexture(unsigned int& texture, string filename)
 {
 	glGenTextures(1, &texture);
 	glBindTexture(GL_TEXTURE_2D, texture);
@@ -81,7 +81,7 @@ int loadTexture(unsigned int& texture, char* filename)
 
 	int width, height, nrChannels;
 
-	unsigned char* data = stbi_load(filename, &width, &height, &nrChannels, 0);
+	unsigned char* data = stbi_load(filename.c_str(), &width, &height, &nrChannels, 0);
 	if (data)
 	{
 		if (nrChannels == 4)
@@ -101,6 +101,8 @@ int loadTexture(unsigned int& texture, char* filename)
 		std::cout << "Failed to load texture" << std::endl;
 	}
 	stbi_image_free(data);
+
+	return texture;
 }
 
 void SRD2SRU(double& mx, double& my, float& x, float& y) {

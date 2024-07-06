@@ -18,7 +18,7 @@
     <ClCompile Include="Visoaisometrica.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
-    <ClCompile Include="_geral_vs.vs">
+    <ClCompile Include="_geral_vs.glsl">
       <Filter>Arquivos de Recurso</Filter>
     </ClCompile>
     <ClCompile Include="gl_utils.cpp">
@@ -29,7 +29,7 @@
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="_geral_fs.fs">
+    <None Include="_geral_fs.glsl">
       <Filter>Arquivos de Recurso</Filter>
     </None>
   </ItemGroup>

@@ -102,9 +102,10 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>../../Dependencies/stb;../../Dependencies/glfw-3.4.bin.WIN64/include;../../Dependencies/glew-2.1.0/include;../../Dependencies/GLAD/include;../../Dependencies/glm</AdditionalIncludeDirectories>
+      <LanguageStandard>stdcpp14</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
@@ -133,10 +134,10 @@
     <ClCompile Include="gl_utils.cpp" />
     <ClCompile Include="maths_funcs.cpp" />
     <ClCompile Include="Visoaisometrica.cpp" />
-    <ClCompile Include="_geral_vs.vs" />
+    <ClCompile Include="_geral_vs.glsl" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="_geral_fs.fs" />
+    <None Include="_geral_fs.glsl" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="gl_utils.h" />
