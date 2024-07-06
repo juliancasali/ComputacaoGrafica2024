@@ -2,12 +2,9 @@
 
 #include <glm/glm.hpp>
 #include <glm/gtc/matrix_transform.hpp>
+#include <glm/gtc/type_ptr.hpp>
 
 #include "Shader.h"
-#include "iostream"
-
-
-
 
 class Sprite
 {
@@ -23,8 +20,6 @@ public:
 
     void update();
     void Draw();
-
-    void morroIt();
 
     inline void setShader(Shader* shader)
     {
@@ -55,7 +50,7 @@ protected:
     int nAnimations, nFrames, iAnimation, iFrame;
     float ds, dt;
     float FPS;
-    glm::vec2 speed;
+    float lastTime;
     Shader* shader;
-
+    glm::vec2 speed;
 };

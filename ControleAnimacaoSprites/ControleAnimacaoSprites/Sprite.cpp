@@ -1,9 +1,6 @@
 #include "Sprite.h"
 #include <GLFW/glfw3.h>
 
-enum movement { LEFT, RIGHT };
-
-
 Sprite::Sprite() { }
 
 Sprite::~Sprite()
@@ -15,8 +12,8 @@ void Sprite::init(GLuint texture, int nAnimations, int nFrames, glm::vec3 positi
 {
     this->texture = texture;
     this->position = position;
-    this->size.x = size.x / (float)nFrames;
-    this->size.y = size.y / (float)nAnimations;
+    this->size.x = size.x / float(nFrames);
+    this->size.y = size.y / float(nAnimations);
     this->angulo = angulo;
     this->nAnimations = nAnimations;
     this->nFrames = nFrames;
@@ -24,10 +21,8 @@ void Sprite::init(GLuint texture, int nAnimations, int nFrames, glm::vec3 positi
     speed.x = 10.0;
     speed.y = 10.0;
 
-    ds = 1.0 / (float)nFrames;
-    dt = 1.0 / (float)nAnimations;
-
-    //iFrame = ds + 1;
+    ds = 1.0 / float(nFrames);
+    dt = 1.0 / float(nAnimations);
 
     GLfloat vertices[] = {
 
@@ -81,27 +76,23 @@ void Sprite::init(GLuint texture, int nAnimations, int nFrames, glm::vec3 positi
 
     // Desvincula o VAO
     glBindVertexArray(0);
-
 }
 
 void Sprite::update()
-{
-    
+{    
     iFrame = (iFrame + 1) % nFrames;
-
+        
+    
     float offsetS = iFrame + ds;
     float offsetT = iAnimation + dt;
-    this->shader->setVec2("offsetTex", offsetS, offsetT);
+    this->shader->setVec2("offsets", offsetS, offsetT);
 
     
 
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, position);
-   // if (isMirroded)
-    //    model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0f, 1.0f, 1.0f));
     model = glm::rotate(model, glm::radians(angulo), glm::vec3(0.0f, 0.0f, 1.0f));
     model = glm::scale(model, size);
-
     this->shader->setMat4("model", model);
 }
 
@@ -112,10 +103,7 @@ void Sprite::Draw()
     glBindTexture(GL_TEXTURE_2D, texture);
     glBindVertexArray(VAO);
     glDrawArrays(GL_TRIANGLES, 0, 6);
-    glBindTexture(GL_TEXTURE_2D, 0);
+    
     glBindVertexArray(0);
-}
-
-void Sprite::morroIt()
-{
+    glBindTexture(GL_TEXTURE_2D, 0);
 }

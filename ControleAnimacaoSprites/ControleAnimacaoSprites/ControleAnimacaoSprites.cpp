@@ -23,7 +23,7 @@ using namespace std;
 // Dimensão da janela
 const GLint WIDTH = 800, HEIGHT = 600;
 
-Sprite sprite, sprite2, sprite3, sprite4, sprite5, sprite6;
+Sprite sprite1, sprite2, sprite3, sprite4, sprite5, sprite6;
 
 glm::mat4 matrix = glm::mat4(1);
 
@@ -79,30 +79,39 @@ int main() {
     shader.use();
 
     int imageWidth, imageHeight;
+      
+    //GLuint textura2 = loadTexture("Battleground1.PNG", imageWidth, imageHeight);
+    GLuint textura1 = loadTexture("walk.PNG", imageWidth, imageHeight);
+    GLuint textura2 = loadTexture("BG1.PNG", imageWidth, imageHeight);
+    GLuint textura3 = loadTexture("BG2.PNG", imageWidth, imageHeight);
+    GLuint textura4 = loadTexture("BG3.PNG", imageWidth, imageHeight);
+    GLuint textura5 = loadTexture("Arvore.PNG", imageWidth, imageHeight);
     
 
-    GLuint textura1 = loadTexture("walk.PNG", imageWidth, imageHeight);
-    GLuint textura2 = loadTexture("Battleground1.PNG", imageWidth, imageHeight);
-    //GLuint textura3 = loadTexture("BG3.PNG");
-    //GLuint textura4 = loadTexture("Arvore.PNG");
-
-
     //Criação de uma sprite
-    sprite.init(textura1, 1, 6, glm::vec3(400, 300, 0.0), glm::vec3(imageWidth/ 3, imageHeight /3, 1.0), 0.0, glm::vec3(1.0, 0.0, 1.0));
-    sprite.setShader(&shader);
+    sprite1.init(textura1, 1, 6, glm::vec3(400, 100, 0.0), glm::vec3(imageWidth * 2, imageHeight * 2, 1.0), 0.0, glm::vec3(1.0, 0.0, 1.0));
+    sprite1.setShader(&shader);
 
+    sprite2.init(textura2, 1, 1, glm::vec3(400, 300, 0.0), glm::vec3(imageWidth * 4, imageHeight * 5, 1.0), 0.0, glm::vec3(0.0, 1.0, 1.0));
+    sprite2.setShader(&shader);;
 
-    sprite2.init(textura2, 1, 1, glm::vec3(400, 300, 0.0), glm::vec3(imageWidth/2, imageHeight/2, 1.0), 0.0, glm::vec3(0.0, 1.0, 1.0));
-    sprite2.setShader(&shader);
+    sprite3.init(textura3, 1, 1, glm::vec3(400, 300, 0.0), glm::vec3(imageWidth * 4 , imageHeight * 5, 1.0), 0.0, glm::vec3(0.0, 1.0, 1.0));
+    sprite3.setShader(&shader);;
 
-    //Ativando o buffer de textura 
-    glActiveTexture(GL_TEXTURE0);
+    sprite4.init(textura4, 1, 1, glm::vec3(400, 300, 0.0), glm::vec3(imageWidth * 4, imageHeight * 5 , 1.0), 0.0, glm::vec3(0.0, 1.0, 1.0));
+    sprite4.setShader(&shader);;
+
+    sprite5.init(textura5, 1, 1, glm::vec3(400, 300, 0.0), glm::vec3(imageWidth * 4, imageHeight * 5, 1.0), 0.0, glm::vec3(0.0, 1.0, 1.0));
+    sprite5.setShader(&shader);;
 
     //Matriz de projeção
-    glm::mat4 projection = glm::ortho(0.0f, (float)WIDTH, (float)HEIGHT, 0.0f, -1.0f, 1.0f);
+    glm::mat4 projection = glm::ortho(0.0f, 800.f, 0.0f, 600.0f, -1.0f, 1.0f);
 
     //Enviando para o shader a matriz como uma var uniform
     shader.setMat4("projection", projection);
+
+    //Ativando o buffer de textura 
+    glActiveTexture(GL_TEXTURE0);
 
     //Matriz de transformação do objeto (matriz de modelo)
     shader.setInt("texBuffer", 0);
@@ -121,14 +130,27 @@ int main() {
         glViewport(0, 0, width, height);
 
         // Limpa o buffer de cor
-        glClearColor(0.5f, 0.5f, 0.5f, 1.0f); //cor de fundo
+        glClearColor(0.0f, 0.0f, 0.0f, 1.0f); //cor de fundo
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        sprite.setShader(&shader);
+        float angulo = (float)glfwGetTime();
+
+        sprite2.setShader(&shader);
         sprite2.Draw();
-        sprite.Draw();
+
+        sprite3.setShader(&shader);
+        sprite3.Draw();
+
+        sprite4.setShader(&shader);
+        sprite4.Draw();
         
-        
+        sprite5.setShader(&shader);
+        sprite5.Draw();
+
+        sprite1.setShader(&shader);
+        sprite1.Draw();
+        sprite1.update();
+
         glfwSwapBuffers(window);
     }
 
@@ -143,17 +165,17 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         glfwSetWindowShouldClose(window, GL_TRUE);
 
     if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
-        sprite.moveLeft();
+        sprite1.moveLeft();
 
-    if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
-        sprite.moveRight();
+        if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+        sprite1.moveRight();
 }
 
 
 GLuint loadTexture(string fileTexture, int &imageWidth, int &imageHeight)
 {
     std::cout << "Carregando textura..." << std::endl;
-    stbi_set_flip_vertically_on_load(true);
+    //stbi_set_flip_vertically_on_load(true);
 
     GLuint texture;
     glGenTextures(1, &texture);
@@ -165,24 +187,21 @@ GLuint loadTexture(string fileTexture, int &imageWidth, int &imageHeight)
     glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
 
-    int width, height, nrChannels;
-    unsigned char* data = stbi_load(fileTexture.c_str(), &width, &height, &nrChannels, 0);
+    int nrChannels;
+    unsigned char* data = stbi_load(fileTexture.c_str(), &imageWidth, &imageHeight, &nrChannels, 0);
 
     if (data)
     {
         if (nrChannels == 3)
         {
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, width, height, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGB, imageWidth, imageHeight, 0, GL_RGB, GL_UNSIGNED_BYTE, data);
         }
         else
         {
-            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, width, height, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
+            glTexImage2D(GL_TEXTURE_2D, 0, GL_RGBA, imageWidth, imageHeight, 0, GL_RGBA, GL_UNSIGNED_BYTE, data);
         }
 
         glGenerateMipmap(GL_TEXTURE_2D);
-
-        imageWidth = width;
-        imageHeight = height;
 
         stbi_image_free(data);
     }
