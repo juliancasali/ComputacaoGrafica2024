@@ -8,6 +8,11 @@ Sprite::~Sprite()
     glDeleteVertexArrays(1, &VAO);
 }
 
+enum Direcoes{
+    LEFT = 0,
+    RIGHT = 1
+};
+
 void Sprite::init(GLuint texture, int nAnimations, int nFrames, glm::vec3 position, glm::vec3 size, float angulo, glm::vec3 cor)
 {
     this->texture = texture;
@@ -18,8 +23,9 @@ void Sprite::init(GLuint texture, int nAnimations, int nFrames, glm::vec3 positi
     this->nAnimations = nAnimations;
     this->nFrames = nFrames;
 
-    speed.x = 10.0;
-    speed.y = 10.0;
+    speed = 10.0;
+
+    iAnimation = RIGHT;
 
     ds = 1.0 / float(nFrames);
     dt = 1.0 / float(nAnimations);
@@ -81,18 +87,26 @@ void Sprite::init(GLuint texture, int nAnimations, int nFrames, glm::vec3 positi
 void Sprite::update()
 {    
     iFrame = (iFrame + 1) % nFrames;
-        
+    
     
     float offsetS = iFrame + ds;
     float offsetT = iAnimation + dt;
     this->shader->setVec2("offsets", offsetS, offsetT);
 
-    
-
     glm::mat4 model = glm::mat4(1.0f);
     model = glm::translate(model, position);
     model = glm::rotate(model, glm::radians(angulo), glm::vec3(0.0f, 0.0f, 1.0f));
     model = glm::scale(model, size);
+
+
+    if (this->nAnimations == 5 && iAnimation == LEFT) {
+        model = glm::rotate(model, glm::radians(180.0f), glm::vec3(0.0, 1.0, 0.0));
+    }
+
+    if (this->nAnimations == 5 && iAnimation == RIGHT) {
+        model = glm::rotate(model, glm::radians(180.0f), glm::vec3(1.0, 0.0, 0.0));
+    }
+
     this->shader->setMat4("model", model);
 }
 
@@ -106,4 +120,33 @@ void Sprite::Draw()
     
     glBindVertexArray(0);
     glBindTexture(GL_TEXTURE_2D, 0);
+}
+void Sprite::moveRight()
+{
+    if (position.x >= 800)
+    {
+        position.x = 800;
+    }
+    else
+    {
+        position.x += speed;
+        if (size.x < 0.0)
+            size.x = -size.x;
+        iAnimation = RIGHT;
+    }
+}
+
+void Sprite::moveLeft()
+{
+    if (position.x <= 0)
+    {
+        position.x = 0;
+    }
+    else
+    {
+        position.x -= speed;
+        if (size.x > 0.0)
+            size.x = -size.x;
+        iAnimation = LEFT;
+    }
 }

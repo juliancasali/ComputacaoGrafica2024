@@ -9,11 +9,11 @@ out vec2 texcoord;
 
 uniform mat4 projection;
 uniform mat4 model;
-uniform vec2 offsetTex;
+uniform vec2 offsets;
 
 void main()
 {
 	vertexColor = color;
-	texcoord = vec2(texc.x + offsetTex.x , 1 - texc.y + offsetTex.y);
 	gl_Position = projection * model * vec4(position, 1.0);
+	texcoord = vec2(texc.x + offsets.x , 1 - texc.y + offsets.y);
 }

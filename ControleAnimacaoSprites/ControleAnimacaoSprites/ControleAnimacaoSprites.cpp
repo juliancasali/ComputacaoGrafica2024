@@ -23,7 +23,7 @@ using namespace std;
 // Dimensão da janela
 const GLint WIDTH = 800, HEIGHT = 600;
 
-Sprite sprite1, sprite2, sprite3, sprite4, sprite5, sprite6;
+Sprite knight, sprite2, sprite3, sprite4, sprite5, sprite6;
 
 glm::mat4 matrix = glm::mat4(1);
 
@@ -89,15 +89,15 @@ int main() {
     
 
     //Criação de uma sprite
-    sprite1.init(textura1, 1, 6, glm::vec3(400, 100, 0.0), glm::vec3(imageWidth * 2, imageHeight * 2, 1.0), 0.0, glm::vec3(1.0, 0.0, 1.0));
-    sprite1.setShader(&shader);
+    knight.init(textura1, 1, 6, glm::vec3(400, 100, 0.0), glm::vec3(imageWidth * 2, imageHeight * 2, 1.0), 0.0, glm::vec3(1.0, 0.0, 1.0));
+    knight.setShader(&shader);
 
     sprite2.init(textura2, 1, 1, glm::vec3(400, 300, 0.0), glm::vec3(imageWidth * 4, imageHeight * 5, 1.0), 0.0, glm::vec3(0.0, 1.0, 1.0));
     sprite2.setShader(&shader);;
 
     sprite3.init(textura3, 1, 1, glm::vec3(400, 300, 0.0), glm::vec3(imageWidth * 4 , imageHeight * 5, 1.0), 0.0, glm::vec3(0.0, 1.0, 1.0));
     sprite3.setShader(&shader);;
-
+    
     sprite4.init(textura4, 1, 1, glm::vec3(400, 300, 0.0), glm::vec3(imageWidth * 4, imageHeight * 5 , 1.0), 0.0, glm::vec3(0.0, 1.0, 1.0));
     sprite4.setShader(&shader);;
 
@@ -135,22 +135,12 @@ int main() {
 
         float angulo = (float)glfwGetTime();
 
-        sprite2.setShader(&shader);
         sprite2.Draw();
-
-        sprite3.setShader(&shader);
         sprite3.Draw();
-
-        sprite4.setShader(&shader);
         sprite4.Draw();
-        
-        sprite5.setShader(&shader);
-        sprite5.Draw();
-
-        sprite1.setShader(&shader);
-        sprite1.Draw();
-        sprite1.update();
-
+        sprite5.Draw();       
+        knight.Draw();
+     
         glfwSwapBuffers(window);
     }
 
@@ -165,10 +155,10 @@ void key_callback(GLFWwindow* window, int key, int scancode, int action, int mod
         glfwSetWindowShouldClose(window, GL_TRUE);
 
     if (glfwGetKey(window, GLFW_KEY_LEFT) == GLFW_PRESS)
-        sprite1.moveLeft();
+        knight.moveLeft();
 
-        if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
-        sprite1.moveRight();
+    if (glfwGetKey(window, GLFW_KEY_RIGHT) == GLFW_PRESS)
+        knight.moveRight();
 }
 
 

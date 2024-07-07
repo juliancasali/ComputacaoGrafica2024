@@ -20,6 +20,8 @@ public:
 
     void update();
     void Draw();
+    void moveRight();
+    void moveLeft();
 
     inline void setShader(Shader* shader)
     {
@@ -29,13 +31,6 @@ public:
     inline void setAngulo(float angulo)
     {
         this->angulo = angulo;
-
-    }
-    inline void moveRight() { 
-        this->position.x += speed.x; 
-    }
-    inline void moveLeft() { 
-        this->position.x -= speed.x;
     }
 
 protected:
@@ -49,8 +44,11 @@ protected:
     // Animação por sprite
     int nAnimations, nFrames, iAnimation, iFrame;
     float ds, dt;
+
     float FPS;
     float lastTime;
+
     Shader* shader;
-    glm::vec2 speed;
+
+    float speed;
 };
