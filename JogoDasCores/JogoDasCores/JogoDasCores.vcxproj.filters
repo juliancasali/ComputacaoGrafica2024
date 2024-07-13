@@ -15,41 +15,26 @@
     </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="Sprite.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="Tile.cpp">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="glad.c">
-      <Filter>Arquivos de Origem</Filter>
-    </ClCompile>
-    <ClCompile Include="Visoaisometrica.cpp">
+    <ClCompile Include="JogoDasCores.cpp">
       <Filter>Arquivos de Origem</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="Sprite.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
     <ClInclude Include="Shader.h">
       <Filter>Arquivos de Cabeçalho</Filter>
     </ClInclude>
-    <ClInclude Include="Tile.h">
-      <Filter>Arquivos de Cabeçalho</Filter>
-    </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <None Include="VertexShader.vs">
+    <None Include="Retangulo.vs">
       <Filter>Arquivos de Recurso</Filter>
     </None>
-    <None Include="FragmentShader.fs">
+    <None Include="Retangulo.fs">
       <Filter>Arquivos de Recurso</Filter>
     </None>
-    <None Include="Frag.fs">
+    <None Include="Palete.vs">
       <Filter>Arquivos de Recurso</Filter>
     </None>
-    <None Include="Vert.vs">
+    <None Include="Palete.fs">
       <Filter>Arquivos de Recurso</Filter>
     </None>
   </ItemGroup>

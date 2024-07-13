@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.9.34728.123
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}") = "JogoDasCores", "JogoDasCores\JogoDasCores.vcxproj", "{6F7B40F5-54A3-4902-91B3-FE9514A8A1D3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|x64 = Debug|x64
+		Debug|x86 = Debug|x86
+		Release|x64 = Release|x64
+		Release|x86 = Release|x86
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{6F7B40F5-54A3-4902-91B3-FE9514A8A1D3}.Debug|x64.ActiveCfg = Debug|x64
+		{6F7B40F5-54A3-4902-91B3-FE9514A8A1D3}.Debug|x64.Build.0 = Debug|x64
+		{6F7B40F5-54A3-4902-91B3-FE9514A8A1D3}.Debug|x86.ActiveCfg = Debug|Win32
+		{6F7B40F5-54A3-4902-91B3-FE9514A8A1D3}.Debug|x86.Build.0 = Debug|Win32
+		{6F7B40F5-54A3-4902-91B3-FE9514A8A1D3}.Release|x64.ActiveCfg = Release|x64
+		{6F7B40F5-54A3-4902-91B3-FE9514A8A1D3}.Release|x64.Build.0 = Release|x64
+		{6F7B40F5-54A3-4902-91B3-FE9514A8A1D3}.Release|x86.ActiveCfg = Release|Win32
+		{6F7B40F5-54A3-4902-91B3-FE9514A8A1D3}.Release|x86.Build.0 = Release|Win32
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {83F985F8-EBD5-4E0C-A0D1-09FD6B65529F}
+	EndGlobalSection
+EndGlobal

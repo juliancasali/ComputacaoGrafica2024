@@ -21,8 +21,8 @@
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
-    <ProjectGuid>{90fd8dc6-e113-4051-836a-6db8001c6d05}</ProjectGuid>
-    <RootNamespace>Visoaisometrica</RootNamespace>
+    <ProjectGuid>{6f7b40f5-54a3-4902-91b3-fe9514a8a1d3}</ProjectGuid>
+    <RootNamespace>JogoDasCores</RootNamespace>
     <WindowsTargetPlatformVersion>10.0</WindowsTargetPlatformVersion>
   </PropertyGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.Default.props" />
@@ -102,16 +102,15 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_CONSOLE;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_CONSOLE;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>../../Dependencies/stb;../../Dependencies/glfw-3.4.bin.WIN64/include;../../Dependencies/glad/include;../../Dependencies/glm</AdditionalIncludeDirectories>
-      <LanguageStandard>stdcpp14</LanguageStandard>
+      <AdditionalIncludeDirectories>../../Dependencies/stb;../../Dependencies/glfw-3.4.bin.WIN64/include;../../Dependencies/glew-2.1.0/include;../../Dependencies/GLAD/include;../../Dependencies/glm</AdditionalIncludeDirectories>
     </ClCompile>
     <Link>
       <SubSystem>Console</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>../../Dependencies/glfw-3.4.bin.WIN64/lib-vc2022</AdditionalLibraryDirectories>
-      <AdditionalDependencies>glfw3.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>../../Dependencies/glfw-3.4.bin.WIN64/lib-vc2022;../../Dependencies/glew-2.1.0/lib/Release/x64</AdditionalLibraryDirectories>
+      <AdditionalDependencies>glfw3.lib;opengl32.lib;glew32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -131,21 +130,16 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="glad.c" />
-    <ClCompile Include="Sprite.cpp" />
-    <ClCompile Include="Tile.cpp" />
-    <ClCompile Include="Visoaisometrica.cpp" />
+    <ClCompile Include="JogoDasCores.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Shader.h" />
-    <ClInclude Include="Sprite.h" />
-    <ClInclude Include="Tile.h" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Frag.fs" />
-    <None Include="FragmentShader.fs" />
-    <None Include="Vert.vs" />
-    <None Include="VertexShader.vs" />
+    <None Include="Retangulo.fs" />
+    <None Include="Palete.fs" />
+    <None Include="Retangulo.vs" />
+    <None Include="Palete.vs" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
